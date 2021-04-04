@@ -15,7 +15,7 @@ def interface_menu() -> str:  #not sure if this needs a specifc name
    Lauren Ogilvie
    Patrick Ferenc 
    
-  Displays the user menu with all file management commands for the required user interface. Accepts the user input as a string and then returns the input from the user in uppercase format. 
+  Displays the user menu with all file management commands for the required user interface. Accepts the user input in lowercase or uppercase as a string and then returns the input from the user in uppercase format. 
   
     >>> L)oad image  S)ave-as
     >>> 3)-tone  X)treme contrast  T)int sepia  P)osterize
