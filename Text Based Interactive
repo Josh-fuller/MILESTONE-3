@@ -1,3 +1,49 @@
 # T037 
 # Contributer: LAUREN OGILVIE 101179971
 # Contribiter: PATRICK FERENC, 101192901
+
+import numpy as np
+from Cimpl import load_image, save_as, show, copy, choose_file
+from point_manipulation import _take_first
+from ____ import sepia, three_tone, extreme_contrast,\ posterize, "edge detection", draw_curve, \ _image_border_finding, _interpolate, _exhaustive_search\ flip_vertical, flip_horizontal #just a start probally needs more imports
+
+ 
+
+def interface_menu() -> str:  #not sure if this needs a specifc name 
+   """
+   T037
+   Lauren Ogilvie
+   Patrick Ferenc 
+   
+  Displays the user menu with all file management commands for the required user interface. Accepts the user input as a string and then returns the input from the user in uppercase format. 
+  
+    >>> L)oad image  S)ave-as
+    >>> 3)-tone  X)treme contrast  T)int sepia  P)osterize
+    >>> E)dge detect  D)raw curve  V)ertical flip  H)orizontal Flip 
+    >>> Q)uit 
+    >>>
+    >>> : V
+    V
+    
+    >>> L)oad image  S)ave-as
+    >>> 3)-tone  X)treme contrast  T)int sepia  P)osterize
+    >>> E)dge detect  D)raw curve  V)ertical flip  H)orizontal Flip 
+    >>> Q)uit 
+    >>>
+    >>> : x
+    X
+    """
+    
+    print(" L)oad image  S)ave-as ")
+    print(" 3)-tone  X)treme contrast  T)int sepia  P)osterize ")
+    print(" E)dge detect  D)raw curve  V)ertical flip  H)orizontal Flip ")
+    print(" Q)uit \n ")
+    user_input = input(": ")
+    user_input = user_input.upper()
+    return user_input
+    
+COMMANDS = ["L","S","3","X","T","P","E","D","V","H","Q"] 
+FILTERS = ["3","X","T","P","V","H"]
+image = 0
+
+#need to do while loop 
