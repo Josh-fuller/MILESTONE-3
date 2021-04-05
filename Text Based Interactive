@@ -5,7 +5,7 @@
 import numpy as np
 from Cimpl import load_image, save_as, show, copy, choose_file
 from point_manipulation import _take_first
-from ____ import sepia, three_tone, extreme_contrast,\ posterize, "edge detection", draw_curve, \ _image_border_finding, _interpolate, _exhaustive_search\ flip_vertical, flip_horizontal #just a start probally needs more imports
+from T037_image_filters import sepia, three_tone, extreme_contrast,\ posterize, "edge detection", draw_curve, \ _image_border_finding, _interpolate, _exhaustive_search\ flip_vertical, flip_horizontal #just a start probally needs more imports
 
  
 
@@ -46,4 +46,4 @@ COMMANDS = ["L","S","3","X","T","P","E","D","V","H","Q"]
 FILTERS = ["3","X","T","P","V","H"]
 image = 0
 
-#need to do while loop 
+while 
