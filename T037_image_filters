@@ -1,1 +1,89 @@
 # T037 - Milestone 3 Final Code - Image Filters
+# Josh Fuller 101201594
+# Patrick Ferenc 101192901
+# Jack Oomen 101187427
+# Lauren Ogilvie 101179971
+
+import numpy as np
+from Cimpl import 
+from point_manipulation import 
+
+def blue_channel(image: Image) -> Image: 
+    """
+    # T037
+    # Lauren Ogilvie 101179971
+    Returns the image modified with a blue channel filter. Which is a monocromatic blue image of the original image given. 
+    
+    >>> image = load_image(choose_file())
+    >>> blue = blue_channel(image)
+    >>> show(blue) 
+    
+    """
+    image_new = copy(image)
+    
+    for x, y, (r, g, b) in image:
+        blue_image = create_color(0, 0, b)
+        set_color(image_new, x, y, blue_image)
+        
+        
+  def green_channel(image: Image) -> Image:
+    """ 
+    # T037
+    # Patrick Ferenc 101192901
+    
+    Changes the pixel to be only the green color, 
+    (0,g,0) of the pixel. 
+    
+    >>> image = load_image(choose_file())
+    >>> green = green_channel(image)
+    >>> show(green) 
+    """
+    greenimage = copy(image)
+    
+    for x, y, (r,g,b) in image: 
+        green = create_color(0,g,0) 
+        set_color(greenimage, x, y, green) 
+    return greenimage
+    
+    
+def red_channel(image: Image) -> Image:
+    
+    """
+    # T037
+    # Jack Oomen 101187427# Jack Oomen 101187427
+    
+    Returns a copy of the selected image that only contains each pixels red component, in other words a red filter is applied) 
+    
+    >>> image = load_image(choose_file())
+    >>> red_image = red_channel(image)
+    >>> show(red_image)
+    
+    """
+    filter_image = copy(image)
+    
+    for x, y, (r, g, b) in filter_image:
+        red = create_color(r, 0, 0)
+        set_color(filter_image, x, y, red)
+    return filter_image
+    
+#Contributer: Josh Fuller
+def combine(redimage: Image, greenimage: Image, blueimage: Image) -> Image:
+    """
+    # T037
+    # Josh Fuller
+    Returns a combined image using the RBG colour channel from the three input filter channels.
+    """
+    
+    combined_image = copy(redimage) #Copies a version of the red image
+    for x, y, (r,g,b) in greenimage:
+        first_color = get_color(redimage, x, y) #Copies the color from the first filter
+        second_color = get_color(greenimage, x, y) #Copies the color from the second filter
+        third_color = get_color(blueimage, x, y) #Copies the color from the third filter
+        red = first_color[0] #Takes the rbg value of red and saves it
+        green = second_color[1] #Takes the rbg value of green and saves it
+        blue = third_color[2] #Takes the rbg value of blue and saves it  
+        #Creates an rgb set using the colors of the redimage, greenimage and blueimage
+        combination_filter = create_color(red, green, blue)
+        #Defines the created color set as the combination filter
+        set_color(combined_image, x, y, combination_filter)
+    return combined_image #Returns the final image
