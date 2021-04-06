@@ -4,18 +4,18 @@
 
 import numpy as np
 from Cimpl import load_image, save_as, show, copy, choose_file
-from point_manipulation import _take_first
-from T037_image_filters import sepia, three_tone, extreme_contrast,\ posterize, "edge detection", draw_curve, \ _image_border_finding, _interpolate, _exhaustive_search\ flip_vertical, flip_horizontal #just a start probally needs more imports
+#from point_manipulation import _take_first
+#from T037_image_filters import sepia, three_tone, extreme_contrast, posterize, "edge detection", draw_curve, _image_border_finding, _interpolate, _exhaustive_search, flip_vertical, flip_horizontal #just a start probally needs more imports
 
  
 
 def interface_menu() -> str:  #not sure if this needs a specifc name 
-   """
-   T037
-   Lauren Ogilvie
-   Patrick Ferenc 
+    """
+    T037
+    Lauren Ogilvie
+    Patrick Ferenc 
    
-  Displays the user menu with all file management commands for the required user interface. Accepts the user input in lowercase or uppercase as a string and then returns the input from the user in uppercase format. 
+    Displays the user menu with all file management commands for the required user interface. Accepts the user input in lowercase or uppercase as a string and then returns the input from the user in uppercase format. 
   
     >>> L)oad image  S)ave-as
     >>> 3)-tone  X)treme contrast  T)int sepia  P)osterize
@@ -33,17 +33,23 @@ def interface_menu() -> str:  #not sure if this needs a specifc name
     >>> : x
     X
     """
+    usercommand = 0
     
-    print(" L)oad image  S)ave-as ")
-    print(" 3)-tone  X)treme contrast  T)int sepia  P)osterize ")
-    print(" E)dge detect  D)raw curve  V)ertical flip  H)orizontal Flip ")
-    print(" Q)uit \n ")
-    user_input = input(": ")
-    user_input = user_input.upper()
-    return user_input
+    while usercommand != "Q" :
+        print(" L)oad image  S)ave-as ")
+        print(" 3)-tone  X)treme contrast  T)int sepia  P)osterize ")
+        print(" E)dge detect  D)raw curve  V)ertical flip  H)orizontal Flip ")
+        print(" Q)uit \n ")
+        user_input = input(": ")
+        user_input = user_input.upper()
+        print(user_input)
+        usercommand = user_input
+        for i in COMMANDS :
+            if i == user_input :
+                print("matches")
+
+    return print("Quiting software")
     
-COMMANDS = ["L","S","3","X","T","P","E","D","V","H","Q"] 
+COMMANDS = ['L','S','3','X','T','P','E','D','V','H','Q'] 
 FILTERS = ["3","X","T","P","V","H"]
 image = 0
-
-while 
