@@ -87,3 +87,49 @@ def combine(redimage: Image, greenimage: Image, blueimage: Image) -> Image:
         #Defines the created color set as the combination filter
         set_color(combined_image, x, y, combination_filter)
     return combined_image #Returns the final image
+    
+ def three_tone
+ 
+ 
+ 
+ 
+ 
+ 
+def extreme_contrast 
+
+
+
+
+
+
+
+def sepia
+
+
+def _adjust_component
+
+
+def posterize 
+
+
+def detect edges
+
+
+def draw_curve
+
+
+def _interpolate 
+
+def _image_border_finding
+
+
+def _exhaustive_search
+
+
+def flip_vertical
+
+
+flip_horizontal(
+
+
+
