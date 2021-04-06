@@ -1,0 +1,18 @@
+#This is optional 
+
+# ECOR 1042 Milestone 3 - User Interface Functions
+# T037
+# Josh Fuller 101201594
+# Patrick Ferenc 101192901
+# Jack Oomen 101187427
+# Lauren Ogilvie 101179971
+
+from Cimpl import *
+from T037_image_filters import ....
+
+def applied_filter(image: Image, filter: str) -> Image:
+   """
+   #Contributer:
+   #Contributer:
+   
+   Returns 
