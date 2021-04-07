@@ -37,6 +37,7 @@ def interface_menu() -> str:  #not sure if this needs a specifc name
     
     while usercommand != "Q" :
         print(" L)oad image  S)ave-as ")
+        print(" G)reen image  R)ed image  B)lue image  C)ombine ")
         print(" 3)-tone  X)treme contrast  T)int sepia  P)osterize ")
         print(" E)dge detect  D)raw curve  V)ertical flip  H)orizontal Flip ")
         print(" Q)uit \n ")
@@ -50,6 +51,6 @@ def interface_menu() -> str:  #not sure if this needs a specifc name
 
     return print("Quiting software")
     
-COMMANDS = ['L','S','3','X','T','P','E','D','V','H','Q'] 
+COMMANDS = ['L','S','G','R','B','C','3','X','T','P','E','D','V','H','Q'] 
 FILTERS = ["3","X","T","P","V","H"]
 image = 0
