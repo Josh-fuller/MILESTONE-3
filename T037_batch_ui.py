@@ -1,13 +1,14 @@
 from Cimpl import *
 
 from T037_image_filters import *
-
+#Contributors: JOSH FULLER 101201594
+#              JACK OOMEN
 # Creates the presets for gray, blood and lemon
 gray = create_color(128,128,128)
 blood = create_color(255,0,0)
 lemon = create_color(255,255,0)
 
-#REquests for the user to input a file namefile = str(input("What is the text file name?"))
+#Requests for the user to input a file namefile = str(input("What is the text file name?"))
 
 def apply_filters(image,filters):
     """
