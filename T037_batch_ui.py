@@ -2,7 +2,7 @@ from Cimpl import *
 
 from T037_image_filters import *
 #Contributors: JOSH FULLER 101201594
-#              JACK OOMEN
+#              JACK OOMEN 101187427
 # Creates the presets for gray, blood and lemon
 gray = create_color(128,128,128)
 blood = create_color(255,0,0)
