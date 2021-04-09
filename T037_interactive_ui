@@ -83,10 +83,17 @@ def interface_menu() -> str:  #not sure if this needs a specifc name
             thickness = input("Threshold thickness : ")
             newimage = detect_edges(image,thickness)
             show(newimage)  
-        elif user_input == "D" : 
-            newimage = draw_curve(image)
+        elif user_input == "D" :
+            colour = input("Enter desired colour of line:")
+            pointlist = []
+            newimage = draw_curve(image, colour, pointlist)
             show(newimage)            
-
+        elif user_input == "V" : 
+            newimage = flip_vertical(image)
+            show(newimage)
+        elif user_input == "H" : 
+            newimage = flip_horizontal(image)
+            show(newimage)            
     return print("Quiting software")
     
 COMMANDS = ['L','S','G','R','B','C','3','X','T','P','E','D','V','H','Q'] 
