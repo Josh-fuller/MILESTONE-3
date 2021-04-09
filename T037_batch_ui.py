@@ -1,6 +1,6 @@
 from Cimpl import *
 
-from T037_image_filters import three_tone, extreme_contrast, sepia, posterize, detect_edges, flip_vertical, flip_horizontal
+from T037_image_filters *
 #Contributors: JOSH FULLER 101201594
 #              JACK OOMEN 101187427
 
