@@ -1,6 +1,7 @@
 # T037 
 # Contributer: LAUREN OGILVIE 101179971
 # Contribiter: PATRICK FERENC, 101192901
+# Submitted April 9th 2021
 
 import numpy as np
 from Cimpl import load_image, save_as, show, copy, choose_file
