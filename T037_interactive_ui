@@ -45,10 +45,35 @@ def interface_menu() -> str:  #not sure if this needs a specifc name
         user_input = user_input.upper()
         print(user_input)
         usercommand = user_input
-        for i in COMMANDS :
-            if i == user_input :
-                print("matches")
-
+        %for i in COMMANDS :
+            %if i == user_input :
+        if user_input == "L" :
+            image = load_image(choose_file())
+            show(image)
+        elif user_input == "S" : # i honestly done know how this one works
+            
+        elif user_input == "G" : 
+            newimage = green_channel(image)
+            show(newimage)
+        elif user_input == "R" : 
+            newimage = red_channel(image)
+            show(newimage)
+        elif user_input == "B" : 
+            newimage = blue_channel(image)
+            show(newimage)
+        elif user_input == "C" : 
+            newimage = combine(image)
+            show(newimage)
+        elif user_input == "3" : 
+            tone1 = input("Tone1 : ")
+            tone2 = input("Tone2 : ")
+            tone3 = input("Tone3 : ")
+            newimage = three_tone(image, tone1, tone2, tone3)
+            show(newimage)
+        elif user_input == "X" : 
+            newimage = extreme_contrast(image)
+            show(newimage)            
+ 
     return print("Quiting software")
     
 COMMANDS = ['L','S','G','R','B','C','3','X','T','P','E','D','V','H','Q'] 
