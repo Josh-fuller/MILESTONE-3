@@ -7,6 +7,7 @@
 import numpy as np
 from Cimpl import *
 from point_manipulation import *
+from simple_Cimpl_filters import grayscale
 
 def blue_channel(image: Image) -> Image: 
     """
@@ -249,8 +250,6 @@ def posterize(image: Image) -> Image:
         
     return posterimage
 
-
-def posterize 
 
 
 def detect_edges(image: Image, threshold: int) -> Image:
