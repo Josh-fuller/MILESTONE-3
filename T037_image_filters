@@ -190,7 +190,7 @@ def sepia(image: Image) -> Image:
                    
     return image_new1 
 
-def _adjust_component(image: Image) -> Image:
+def posterize(image: Image) -> Image:
     """ 
     changes the components of a pixel to be the mid point of its quadrant.
     There are four quardents (0..63),(64..127),(128..191),(192..255)
