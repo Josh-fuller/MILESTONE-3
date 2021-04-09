@@ -73,7 +73,20 @@ def interface_menu() -> str:  #not sure if this needs a specifc name
         elif user_input == "X" : 
             newimage = extreme_contrast(image)
             show(newimage)            
- 
+        elif user_input == "T" : 
+            newimage = sepia(image)
+            show(newimage)
+        elif user_input == "P" : 
+            newimage = posterize(image)
+            show(newimage)
+        elif user_input == "E" : 
+            thickness = input("Threshold thickness : ")
+            newimage = detect_edges(image,thickness)
+            show(newimage)  
+        elif user_input == "D" : 
+            newimage = draw_curve(image)
+            show(newimage)            
+
     return print("Quiting software")
     
 COMMANDS = ['L','S','G','R','B','C','3','X','T','P','E','D','V','H','Q'] 
