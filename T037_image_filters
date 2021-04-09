@@ -87,49 +87,303 @@ def combine(redimage: Image, greenimage: Image, blueimage: Image) -> Image:
         #Defines the created color set as the combination filter
         set_color(combined_image, x, y, combination_filter)
     return combined_image #Returns the final image
+ 
+def _interpolation(sorted_points: list) -> list:
     
- def three_tone
- 
- 
- 
- 
- 
- 
-def extreme_contrast 
+    x_coords , y_coords = pm.get_x_y_lists(sorted_points) #splits up the x and y coordinates from the list
+    
+    #    print(x_coords)
+    #    print(y_coords)    
+    
+    coefficients = np.polyfit(x_coords,y_coords, 2, rcond=None, full=False, w=None, cov=False) #uses the polyfit function to derive the coefficients
+    #print(coefficients)
+    
+    return coefficients 
 
+def _image_border_finding(size: list, coefficients: list) -> tuple: 
+    
+    
+    size_x = size[0] #length of the image
+    size_y = size[1] #height of the image
+    master_list = []
+    
+    """
+    evaluates the coefficients using polyval and exhaustive search. If they exist and are within the bounds of the image, the master list is appended with the coordinates.
+    """
+    left_check = np.polyval(coefficients, 0)
+    if np.not_equal(left_check, type(None)) and (left_check >= 0) and (left_check <= size_y - 1):
+        master_list.append((0,np.rint(left_check).astype(int)))
+        #print( 'left', (0,np.rint(left_check).astype(int)) )
+       
+    
+    right_check = np.polyval(coefficients, (size_x - 1))
+    if np.not_equal(right_check, type(None)) and np.greater_equal(right_check, 0) and np.less_equal(right_check , size_y - 1):
+        master_list.append((size_x-1,np.rint(right_check).astype(int)))
+        #print('right', (size_x-1,np.rint(right_check).astype(int)))
+    
+    top_check = es._exhaustive_search(size_x - 1, coefficients, 0)
+    if np.not_equal(top_check, None) and np.greater_equal(top_check, 0) and np.less_equal(top_check, size_x - 1):
+        master_list.append((np.rint(top_check).astype(int),0)) 
+        #print('top',top_check,0)
+            
+    bottom_check = es._exhaustive_search(size_x - 1, coefficients, (size_y - 1))
+    if np.not_equal(bottom_check, None) and np.greater_equal(bottom_check, 0) and np.less_equal(bottom_check, size_x):
+        master_list.append((np.rint(bottom_check).astype(int),size_y - 1)) 
+        #print('bottom',(np.rint(bottom_check).astype(int),size_y - 1))        
+      
+    #print(sorted(master_list, key = lambda item: item[0])) #sorts the list by ascending x value
+    border_points = sorted(master_list, key = lambda item: item[0]) #saves the sorted list into the variable border_points for ease of access
+    return(border_points)
 
+def _exhaustive_searchdef _exhaustive_search(max_x: int, polycoeff: list, val: int) -> int:
+    """
+    Solves f(x)-val=0 for x between 0 and max_x where polycoeff contains the
+    coefficients of f, using EPSILON of 1 (as we only need ints for pixels).
+    Returns None if there is no solution between the bounds.
+   
+    >>> _exhaustive_search(639,[6.33e-03,-3.80e+00,5.57e+02],0)
+    253
+    >>> _exhaustive_search(639,[7.24e-04,-1.19e+00,4.51e+02],0)
+    590
+    >>> _exhaustive_search(639,[7.24e-04,-1.19e+00,4.51e+02],479)
+    None
+    """
+    EPSILON = 1
 
+    equation_new = []
+    for i in range(-len(polycoeff),0):
+        if i == -1:
+            equation_new.append(polycoeff[i] - val)
+        else:
+            equation_new.append(polycoeff[i])
+            
+    guess = 0
+    guess_function = np.polyval(equation_new, guess)
+    last_sign = np.sign(guess_function)
+    current_sign = np.sign(guess_function)
+    while abs(guess_function) >= EPSILON and current_sign == last_sign and guess <= max_x:        
+        guess += 1
+        last_sign = current_sign
+        guess_function = np.polyval(equation_new, guess)
+        current_sign = np.sign(guess_function)
+        
+    if guess > max_x:
+        return None
+    else:
+        return guess
+   
+#This function takes an image and displays a copy of the image, using its brightness to convert it into three-tone
+def three_tone(image: Image,string1: str, string2: str,string3: str) -> Image:
+    """
+    Creates a copy of an image with the three-tone filter applied, demonstrating the image in only three colors.
+    
+    >>> three_tone(image, tone1, tone2, tone3)
+    """
+ #Creates a dictionary with the following colors and their corresponding rgb values
+    colordict = {
+        "black": create_color(0,0,0),
+        "white" : create_color(255,255,255),
+        "blood" : create_color(255,0,0),
+        "green" : create_color(0,255,0),
+        "blue" : create_color(0,0,255),
+        "lemon" : create_color(255,255,0),
+        "aqua" : create_color(0,255,255),
+        "pink" : create_color(255,0,255),
+        "gray" : create_color(128,128,128)
+        }    
+    toneimage = copy(image) #Copies the image, so it is not destroyed
+    
+    for x, y, (r, g, b) in toneimage:
+        avg = (r + g + b) // 3 #Computes the average brightness for each pixel
+        #The color is set based on the average calculated above, specified by the parameters below
+        if avg <= 84: 
+            set_color(toneimage, x, y, colordict[string1])
+        elif avg <= 170 and avg > 84:
+            set_color(toneimage, x, y, colordict[string2])
+        else:
+            set_color(toneimage, x, y, colordict[string3])    
 
+    return toneimage    
 
+def sepia(image: Image) -> Image: 
+    """
+    T037
+    Contributor: Lauren Ogilvie 101179971
+    
+    Returns the image modified with a sepia-tone filter applied. 
+    
+    >>> image = load_image(choose_file())
+    >>> sepia = sepia_image(image)
+    >>> show(sepia) 
+    
+    """
+    
+    image_new = copy(image)
+    image_new1 = grayscale(image_new)
+    for x,y, (r,g,b) in image_new1: 
+        
+        dark_sepia = create_color((r*1.1),(g),(b*0.9))
+        medium_sepia = create_color((r*1.15),(g),(b*0.85))
+        light_sepia = create_color((r*1.08),(g),(b*0.93))
+    
+        if r < 63:
+            set_color(image_new1, x,y, dark_sepia) 
+        elif r > 192:
+            set_color(image_new1, x,y, light_sepia) 
+        else:
+            set_color(image_new1, x,y, medium_sepia) 
+                   
+    return image_new1 
 
+def posterize(image: Image) -> Image:
+    """ changes the components of a pixel to be the mid point of its quadrant.
+        There are four quardents (0..63),(64..127),(128..191),(192..255)
+        and the mid points are 31, 95, 159, 223
+        eg: is (135, 90, 239) will become (159, 95, 223)
+    """
+    
+    posterimage = copy(image)
+    for x, y, (r,g,b) in image:
+        c = get_color(posterimage,x, y)
+        (r,g,b) = c
+        if r <= 63 :
+            newr = create_color(31,g,b)
+            set_color(posterimage, x, y, newr)
+        elif r >= 64 and r <= 127 :
+            newr = create_color(95,g,b)
+            set_color(posterimage, x, y, newr)            
+        elif r >= 128 and r <= 191 :
+            newr = create_color(159,g,b)
+            set_color(posterimage, x, y, newr)            
+        else :
+            newr = create_color(223,g,b)
+            set_color(posterimage, x, y, newr)  
+            
+    for x, y, (r,g,b) in image:
+        c = get_color(posterimage,x, y)
+        (r,g,b) = c
+        if g <= 63 :
+            newg = create_color(r,31,b)
+            set_color(posterimage, x, y, newg)
+        elif g >= 64 and g <= 127 :
+            newg = create_color(r,95,b)
+            set_color(posterimage, x, y, newg)
+        elif g >= 128 and g <= 191 :
+            newg = create_color(r,159,b)
+            set_color(posterimage, x, y, newg)                      
+        else :
+            newg = create_color(r,223,b)
+            set_color(posterimage, x, y, newg) 
+            
+    for x, y, (r,g,b) in image: 
+        c = get_color(posterimage,x, y)
+        (r,g,b) = c
+        if b <= 63 :
+            newb = create_color(r,g,31)
+            set_color(posterimage, x, y, newb)
+        elif b >= 64 and b <= 127 :
+            newb = create_color(r,g,95)
+            set_color(posterimage, x, y, newb)
+        elif b >= 128 and b <= 191 :
+            newb = create_color(r,g,159)
+            set_color(posterimage, x, y, newb)                      
+        else :
+            newb = create_color(r,g,223)
+            set_color(posterimage, x, y, newb)            
+        
+    return posterimage
 
-def sepia
+def extreme_contrast(image: Image) -> Image:
+    """
+    Returns a copy of the image with a extreme contrast filter applied 
+    >>> image = load_image(choose_file())
+    >>> contrast_image = extreme_contrast(image)
+    >>> show(contrast_image)
+    """
+    filter_image = copy(image)
+    
+    for x, y, (r, g, b) in filter_image:
+        if r <= 127:
+            r = 0
+        elif r > 127:
+            r = 255
+        if b <= 127:
+            b = 0
+        elif b > 127:
+            b = 255
+        if g <= 127:
+            g = 0
+        elif g > 127:
+                g = 255         
+        contrast = create_color(r, g, b)
+        set_color(filter_image, x, y, contrast)
+    return filter_image
 
+def flip_vertical(image: Image) -> Image: 
+    """ 
+    T037 P4
+    Contributer: Lauren Ogilvie 101179971
+    
+    Returns a copy of the original image that is flipped along the horizontal line.
+    
+    >>> image = load_image(choose_file())
+    >>> image_flipped = flip_vertical(image)
+    >>> show(image_flipped)
+    
+    >>> image = "image"
+    >>> image_flipped = flip_vertical(image)
+    builtins.AttributeError: 'str' object has no attribute 'copy'
+    
+    """
+    modified_image = copy(image)
+    y2 = get_height(image) - 1
+    for x,y, (r,g,b) in image:
+        
+        color = create_color(r,g,b)
+        set_color(modified_image, x,(y2-y), color)
+   
+    return modified_image
 
-def _adjust_component
+# This function will horizonatally flip an image  
+def flip_horizontal(image:Image) -> Image:
+    """ This function is designed to flip an image horizonatally 
+          by flipping the width pixel coordinate. 
+    """
+      
+    flippedimg = copy(image)
+    x2 = get_width(image) - 1
+    for x, y, (r,g,b) in image :
+  
+        copycolor = create_color(r,g,b)
+        set_color(flippedimg, (x2-x), y, copycolor)    
+          
+    return flippedimg
 
-
-def posterize 
-
-
-def detect edges
-
-
-def draw_curve
-
-
-def _interpolate 
-
-def _image_border_finding
-
-
-def _exhaustive_search
-
-
-def flip_vertical
-
-
-flip_horizontal(
-
-
+def detect_edges(image: Image, threshold: int) -> Image:
+    """
+    Creates a pencil sketch image, with varying thickness based upon threshold.
+    
+    >>>image = detect_edges(img,x)
+    """
+    edge_image = copy(image)#Copies the image so it is not destroyed
+    h = get_height(edge_image)#Gets a value for the height of the image
+    
+    
+    for x, y, (r, g, b) in edge_image:#For every pixels rgb value in the image, does the following:
+        
+        if y < (h - 1): #While y is within the image
+            avg1 = (r + g + b) / 3 #Computes the average brightness for each pixel
+            
+            r2,g2,b2 = get_color(edge_image,x,(y + 1)) #Gets the rgb value of the pixel above the one being evaluated 
+             
+            avg2 = (r2 + g2 + b2) / 3 #Computes the average brightness for each pixel
+            
+            if (abs(avg1 - avg2) > threshold ): #Compares the two pixels
+                set_color(edge_image, x, y, create_color(0, 0, 0))#If it is greater than the designated threshold, the pixel becomes black
+            else:
+                set_color(edge_image, x, y, create_color(255, 255, 255))#Else, it becomes white
+        else:
+            set_color(edge_image, x, y, create_color(255, 255, 255))#This is to make sure the pixel at the bottom is white
+            
+    return edge_image
 
