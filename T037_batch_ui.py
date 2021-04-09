@@ -4,10 +4,23 @@ from T037_image_filters import *
 #Contributors: JOSH FULLER 101201594
 #              JACK OOMEN 101187427
 
-# Creates the presets for gray, blood and lemon
-gray = create_color(128,128,128)
-blood = create_color(255,0,0)
-lemon = create_color(255,255,0)
+#Color dictionary
+colordict = {
+    "black": create_color(0,0,0),
+    "white" : create_color(255,255,255),
+    "blood" : create_color(255,0,0),
+    "green" : create_color(0,255,0),
+    "blue" : create_color(0,0,255),
+    "lemon" : create_color(255,255,0),
+    "aqua" : create_color(0,255,255),
+    "pink" : create_color(255,0,255),
+    "gray" : create_color(128,128,128)
+    }    
+
+# Creates the presets for cyan, blood and lemon
+string1 = "aqua" 
+string2 = "blood"
+string3 = "lemon"
 
 #Requests for the user to input a file namefile = str(input("What is the text file name?"))
 
@@ -24,7 +37,7 @@ def apply_filters(image: Image,filter_list: list):
     
     #Relevant filter characters
     if '3' in lowerFilters:  
-        image = three_tone(image,blood,lemon,gray)
+        image = three_tone(image,string1,string2,string3)
     if 'x' in lowerFilters:  
         image = extreme_contrast(image)
     if 't' in lowerFilters:  
@@ -68,5 +81,5 @@ def batch_ui(filename:str) -> list:
     return None 
 
 #Main Script
-file = input("Name of file:")
+file = input("File path:")
 batch_input = batch_ui(file) 
