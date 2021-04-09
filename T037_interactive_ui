@@ -5,7 +5,7 @@
 import numpy as np
 from Cimpl import load_image, save_as, show, copy, choose_file
 from point_manipulation import _take_first
-from T037_image_filters import sepia, three_tone, extreme_contrast, posterize, detect_edges, draw_curve, _image_border_finding, _interpolate, _exhaustive_search, flip_vertical, flip_horizontal 
+from T037_image_filters import *
 
  
 
@@ -45,14 +45,13 @@ def interface_menu() -> str:  #not sure if this needs a specifc name
         user_input = user_input.upper()
         print(user_input)
         usercommand = user_input
-        %for i in COMMANDS :
-            %if i == user_input :
+        #for i in COMMANDS :
+            #if i == user_input :
         if user_input == "L" :
             image = load_image(choose_file())
             show(image)
-        elif user_input == "S" :
-            save_as(image)
-            print("Image Saved Successfully")
+        elif user_input == "S" : # i honestly done know how this one works
+            save_as(newimage)
         elif user_input == "G" : 
             newimage = green_channel(image)
             show(newimage)
