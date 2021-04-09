@@ -5,13 +5,14 @@
 # Lauren Ogilvie 101179971
 
 import numpy as np
-from Cimpl import 
-from point_manipulation import 
+from Cimpl import *
+from point_manipulation import *
 
 def blue_channel(image: Image) -> Image: 
     """
-    # T037
-    # Lauren Ogilvie 101179971
+    T037
+    Contributor: Lauren Ogilvie 101179971
+    
     Returns the image modified with a blue channel filter. Which is a monocromatic blue image of the original image given. 
     
     >>> image = load_image(choose_file())
@@ -26,10 +27,10 @@ def blue_channel(image: Image) -> Image:
         set_color(image_new, x, y, blue_image)
         
         
-  def green_channel(image: Image) -> Image:
+def green_channel(image: Image) -> Image:
     """ 
-    # T037
-    # Patrick Ferenc 101192901
+    T037
+    Contributor: Patrick Ferenc 101192901
     
     Changes the pixel to be only the green color, 
     (0,g,0) of the pixel. 
@@ -49,8 +50,8 @@ def blue_channel(image: Image) -> Image:
 def red_channel(image: Image) -> Image:
     
     """
-    # T037
-    # Jack Oomen 101187427# Jack Oomen 101187427
+    T037
+    Contributor: Jack Oomen 101187427
     
     Returns a copy of the selected image that only contains each pixels red component, in other words a red filter is applied) 
     
@@ -66,11 +67,11 @@ def red_channel(image: Image) -> Image:
         set_color(filter_image, x, y, red)
     return filter_image
     
-#Contributer: Josh Fuller
+
 def combine(redimage: Image, greenimage: Image, blueimage: Image) -> Image:
     """
-    # T037
-    # Josh Fuller
+    T037
+    Contributor: Josh Fuller
     Returns a combined image using the RBG colour channel from the three input filter channels.
     """
     
@@ -87,94 +88,13 @@ def combine(redimage: Image, greenimage: Image, blueimage: Image) -> Image:
         #Defines the created color set as the combination filter
         set_color(combined_image, x, y, combination_filter)
     return combined_image #Returns the final image
- 
-def _interpolation(sorted_points: list) -> list:
     
-    x_coords , y_coords = pm.get_x_y_lists(sorted_points) #splits up the x and y coordinates from the list
-    
-    #    print(x_coords)
-    #    print(y_coords)    
-    
-    coefficients = np.polyfit(x_coords,y_coords, 2, rcond=None, full=False, w=None, cov=False) #uses the polyfit function to derive the coefficients
-    #print(coefficients)
-    
-    return coefficients 
-
-def _image_border_finding(size: list, coefficients: list) -> tuple: 
-    
-    
-    size_x = size[0] #length of the image
-    size_y = size[1] #height of the image
-    master_list = []
-    
-    """
-    evaluates the coefficients using polyval and exhaustive search. If they exist and are within the bounds of the image, the master list is appended with the coordinates.
-    """
-    left_check = np.polyval(coefficients, 0)
-    if np.not_equal(left_check, type(None)) and (left_check >= 0) and (left_check <= size_y - 1):
-        master_list.append((0,np.rint(left_check).astype(int)))
-        #print( 'left', (0,np.rint(left_check).astype(int)) )
-       
-    
-    right_check = np.polyval(coefficients, (size_x - 1))
-    if np.not_equal(right_check, type(None)) and np.greater_equal(right_check, 0) and np.less_equal(right_check , size_y - 1):
-        master_list.append((size_x-1,np.rint(right_check).astype(int)))
-        #print('right', (size_x-1,np.rint(right_check).astype(int)))
-    
-    top_check = es._exhaustive_search(size_x - 1, coefficients, 0)
-    if np.not_equal(top_check, None) and np.greater_equal(top_check, 0) and np.less_equal(top_check, size_x - 1):
-        master_list.append((np.rint(top_check).astype(int),0)) 
-        #print('top',top_check,0)
-            
-    bottom_check = es._exhaustive_search(size_x - 1, coefficients, (size_y - 1))
-    if np.not_equal(bottom_check, None) and np.greater_equal(bottom_check, 0) and np.less_equal(bottom_check, size_x):
-        master_list.append((np.rint(bottom_check).astype(int),size_y - 1)) 
-        #print('bottom',(np.rint(bottom_check).astype(int),size_y - 1))        
-      
-    #print(sorted(master_list, key = lambda item: item[0])) #sorts the list by ascending x value
-    border_points = sorted(master_list, key = lambda item: item[0]) #saves the sorted list into the variable border_points for ease of access
-    return(border_points)
-
-def _exhaustive_searchdef _exhaustive_search(max_x: int, polycoeff: list, val: int) -> int:
-    """
-    Solves f(x)-val=0 for x between 0 and max_x where polycoeff contains the
-    coefficients of f, using EPSILON of 1 (as we only need ints for pixels).
-    Returns None if there is no solution between the bounds.
-   
-    >>> _exhaustive_search(639,[6.33e-03,-3.80e+00,5.57e+02],0)
-    253
-    >>> _exhaustive_search(639,[7.24e-04,-1.19e+00,4.51e+02],0)
-    590
-    >>> _exhaustive_search(639,[7.24e-04,-1.19e+00,4.51e+02],479)
-    None
-    """
-    EPSILON = 1
-
-    equation_new = []
-    for i in range(-len(polycoeff),0):
-        if i == -1:
-            equation_new.append(polycoeff[i] - val)
-        else:
-            equation_new.append(polycoeff[i])
-            
-    guess = 0
-    guess_function = np.polyval(equation_new, guess)
-    last_sign = np.sign(guess_function)
-    current_sign = np.sign(guess_function)
-    while abs(guess_function) >= EPSILON and current_sign == last_sign and guess <= max_x:        
-        guess += 1
-        last_sign = current_sign
-        guess_function = np.polyval(equation_new, guess)
-        current_sign = np.sign(guess_function)
-        
-    if guess > max_x:
-        return None
-    else:
-        return guess
-   
-#This function takes an image and displays a copy of the image, using its brightness to convert it into three-tone
+#Three-tone filter    
 def three_tone(image: Image,string1: str, string2: str,string3: str) -> Image:
     """
+    T037
+    Contributor: Josh Fuller 101201594
+    
     Creates a copy of an image with the three-tone filter applied, demonstrating the image in only three colors.
     
     >>> three_tone(image, tone1, tone2, tone3)
@@ -203,8 +123,43 @@ def three_tone(image: Image,string1: str, string2: str,string3: str) -> Image:
         else:
             set_color(toneimage, x, y, colordict[string3])    
 
-    return toneimage    
+    return toneimage 
+ 
+ 
+#Extreme Contrast Filter 
+def extreme_contrast(image: Image) -> Image:
+    
+    """
+    T037
+    Contributor: Jack Oomen 101187427
+    
+    Returns a copy of the image with a extreme contrast filter applied 
+    
+    >>> image = load_image(choose_file())
+    >>> contrast_image = extreme_contrast(image)
+    >>> show(contrast_image)
+    
+    """
+    filter_image = copy(image)
+    
+    for x, y, (r, g, b) in filter_image:
+        if r <= 127:
+            r = 0
+        elif r > 127:
+            r = 255
+        if b <= 127:
+            b = 0
+        elif b > 127:
+            b = 255
+        if g <= 127:
+            g = 0
+        elif g > 127:
+                g = 255         
+        contrast = create_color(r, g, b)
+        set_color(filter_image, x, y, contrast)
+    return filter_image
 
+#Sepia Filter
 def sepia(image: Image) -> Image: 
     """
     T037
@@ -235,11 +190,12 @@ def sepia(image: Image) -> Image:
                    
     return image_new1 
 
-def posterize(image: Image) -> Image:
-    """ changes the components of a pixel to be the mid point of its quadrant.
-        There are four quardents (0..63),(64..127),(128..191),(192..255)
-        and the mid points are 31, 95, 159, 223
-        eg: is (135, 90, 239) will become (159, 95, 223)
+def _adjust_component(image: Image) -> Image:
+    """ 
+    changes the components of a pixel to be the mid point of its quadrant.
+    There are four quardents (0..63),(64..127),(128..191),(192..255)
+    and the mid points are 31, 95, 159, 223
+    eg: is (135, 90, 239) will become (159, 95, 223)
     """
     
     posterimage = copy(image)
@@ -293,74 +249,14 @@ def posterize(image: Image) -> Image:
         
     return posterimage
 
-def extreme_contrast(image: Image) -> Image:
-    """
-    Returns a copy of the image with a extreme contrast filter applied 
-    >>> image = load_image(choose_file())
-    >>> contrast_image = extreme_contrast(image)
-    >>> show(contrast_image)
-    """
-    filter_image = copy(image)
-    
-    for x, y, (r, g, b) in filter_image:
-        if r <= 127:
-            r = 0
-        elif r > 127:
-            r = 255
-        if b <= 127:
-            b = 0
-        elif b > 127:
-            b = 255
-        if g <= 127:
-            g = 0
-        elif g > 127:
-                g = 255         
-        contrast = create_color(r, g, b)
-        set_color(filter_image, x, y, contrast)
-    return filter_image
 
-def flip_vertical(image: Image) -> Image: 
-    """ 
-    T037 P4
-    Contributer: Lauren Ogilvie 101179971
-    
-    Returns a copy of the original image that is flipped along the horizontal line.
-    
-    >>> image = load_image(choose_file())
-    >>> image_flipped = flip_vertical(image)
-    >>> show(image_flipped)
-    
-    >>> image = "image"
-    >>> image_flipped = flip_vertical(image)
-    builtins.AttributeError: 'str' object has no attribute 'copy'
-    
-    """
-    modified_image = copy(image)
-    y2 = get_height(image) - 1
-    for x,y, (r,g,b) in image:
-        
-        color = create_color(r,g,b)
-        set_color(modified_image, x,(y2-y), color)
-   
-    return modified_image
+def posterize 
 
-# This function will horizonatally flip an image  
-def flip_horizontal(image:Image) -> Image:
-    """ This function is designed to flip an image horizonatally 
-          by flipping the width pixel coordinate. 
-    """
-      
-    flippedimg = copy(image)
-    x2 = get_width(image) - 1
-    for x, y, (r,g,b) in image :
-  
-        copycolor = create_color(r,g,b)
-        set_color(flippedimg, (x2-x), y, copycolor)    
-          
-    return flippedimg
 
 def detect_edges(image: Image, threshold: int) -> Image:
     """
+    #T037 
+    # Josh Fuller 101201594
     Creates a pencil sketch image, with varying thickness based upon threshold.
     
     >>>image = detect_edges(img,x)
@@ -386,4 +282,205 @@ def detect_edges(image: Image, threshold: int) -> Image:
             set_color(edge_image, x, y, create_color(255, 255, 255))#This is to make sure the pixel at the bottom is white
             
     return edge_image
+
+#Curve Draw filter
+#T037
+#Author: Jack Oomen 101187427, assisted by all group members
+#_image_border_finding author: Josh Fuller 101201594
+#_exhaustive_search author: Lauren Ogilvie 101179971
+#interpolation author: Patrick Ferenc 101192901
+
+def draw_curve(image: Image, colour: str, point_list: list) -> tuple:
+    """    
+    Takes points from the user, determines a function that will give a line of best fit. The overlays this line in the users desired colour over the image.
+    
+    >>>image = load_image(choose_file())
+    >>>colour = input("Enter desired colour of line:")
+    >>>pointlist = [] -> for testing
+    >>>curve_image = draw_curve(image, colour, pointlist) -> returns curve_image, border_points
+    """
+    
+    #Creates a dictionary with the following colors and their corresponding rgb values
+    colordict = {
+        "black": (0,0,0),
+        "white" : (255,255,255),
+        "blood" : (255,0,0),
+        "green" : (0,255,0),
+        "blue" : (0,0,255),
+        "lemon" : (255,255,0),
+        "aqua" : (0,255,255),
+        "pink" : (255,0,255),
+        "gray" : (128,128,128)
+          }    
+       
+    #determines the width and height of the image and informs the user
+    curve_image = copy(image) #creates a copy of the original
+    width, height = curve_image.size #determines the width and height of the image
+    image_size = (width, height) #A tuple used for later in the function _image_border_finding
+    print("The image is", width, " pixels wide, and is", height, " pixels tall") #tells the user the dimensions of the image
+    
+    if not point_list: #for testing, if list already contains points don't execute this segement of code
+        points = int(input("How many points would you like to overlay on the graph (must be more than two): ")) #prompts the user, and asks how many points they would like to overlay on the image
+    
+    
+        for i in range(0, points): #creates and adds a tuple containing the x, y coord to the points list. Iterates for how many points the user wants to add.
+            xypos = (int(input("Enter a unique X coordinate: ")), int(input("Enter any Y coordinate: ")))
+            point_list.append(xypos)    
+    
+    sorted_points = sorted(point_list, key = lambda x: x[0]) #sorts the point list in ascending order based on the x value
+    #print(sorted_points)
+    
+    poly_coeffs = _interpolation(sorted_points) #takes the point set and determines the coefficients of the polynomial, returns a list (coeff)
+    
+    border_points = _image_border_finding(image_size, poly_coeffs) #determines where the curve intersects the border of the image, returns a list of tuples (border_points).
+    
+    if colour in colordict: #determines if the colour that the user selected is in the colordict or not, if it is it sets the var linecolor to the desired (r, g, b) values 
+        linecolour = colordict[colour] 
+    
+    curve_points = [] #creates a blanklist
+    for i in range(0, width-1): #iterates through each x coloumn in the image based on image width.
+        cp = (i, np.polyval(poly_coeffs, i)) #creates a tuple of x and y values that represents a point on the curve.
+        curve_points.append(cp) #adds this point to a list.
+    
+    draw = ImageDraw.Draw(curve_image) #allows the user to draw on the image.
+    draw.line(curve_points, fill=linecolour, width=9) #draws a line according to the points determined by the function, sets the colour and width of the line.
+    #curve_image.show() #for proof of concept
+    #print(border_points) #for proof of concept
+    
+    return curve_image, border_points
+
+
+def _interpolation(sorted_points: list) -> list:
+    
+    x_coords , y_coords = pm.get_x_y_lists(sorted_points) #splits up the x and y coordinates from the list
+    
+    #    print(x_coords)
+    #    print(y_coords)    
+    
+    coefficients = np.polyfit(x_coords,y_coords, 2, rcond=None, full=False, w=None, cov=False) #uses the polyfit function to derive the coefficients
+    #print(coefficients)
+    
+    return coefficients    
+
+def _image_border_finding(size: list, coefficients: list) -> tuple: 
+    
+    
+    size_x = size[0] #length of the image
+    size_y = size[1] #height of the image
+    master_list = []
+    
+    """
+    evaluates the coefficients using polyval and exhaustive search. If they exist and are within the bounds of the image, the master list is appended with the coordinates.
+    """
+    left_check = np.polyval(coefficients, 0)
+    if np.not_equal(left_check, type(None)) and (left_check >= 0) and (left_check <= size_y - 1):
+        master_list.append((0,np.rint(left_check).astype(int)))
+        #print( 'left', (0,np.rint(left_check).astype(int)) )
+       
+    
+    right_check = np.polyval(coefficients, (size_x - 1))
+    if np.not_equal(right_check, type(None)) and np.greater_equal(right_check, 0) and np.less_equal(right_check , size_y - 1):
+        master_list.append((size_x-1,np.rint(right_check).astype(int)))
+        #print('right', (size_x-1,np.rint(right_check).astype(int)))
+    
+    top_check = _exhaustive_search(size_x - 1, coefficients, 0)
+    if np.not_equal(top_check, None) and np.greater_equal(top_check, 0) and np.less_equal(top_check, size_x - 1):
+        master_list.append((np.rint(top_check).astype(int),0)) 
+        #print('top',top_check,0)
+            
+    bottom_check = _exhaustive_search(size_x - 1, coefficients, (size_y - 1))
+    if np.not_equal(bottom_check, None) and np.greater_equal(bottom_check, 0) and np.less_equal(bottom_check, size_x):
+        master_list.append((np.rint(bottom_check).astype(int),size_y - 1)) 
+        #print('bottom',(np.rint(bottom_check).astype(int),size_y - 1))        
+      
+    #print(sorted(master_list, key = lambda item: item[0])) #sorts the list by ascending x value
+    border_points = sorted(master_list, key = lambda item: item[0]) #saves the sorted list into the variable border_points for ease of access
+    return(border_points)
+
+
+def _exhaustive_search(max_x: int, polycoeff: list, val: int) -> int:
+    """
+    Solves f(x)-val=0 for x between 0 and max_x where polycoeff contains the
+    coefficients of f, using EPSILON of 1 (as we only need ints for pixels).
+    Returns None if there is no solution between the bounds.
+   
+    >>> _exhaustive_search(639,[6.33e-03,-3.80e+00,5.57e+02],0)
+    253
+    >>> _exhaustive_search(639,[7.24e-04,-1.19e+00,4.51e+02],0)
+    590
+    >>> _exhaustive_search(639,[7.24e-04,-1.19e+00,4.51e+02],479)
+    None
+    """
+    EPSILON = 1
+
+    equation_new = []
+    for i in range(-len(polycoeff),0):
+        if i == -1:
+            equation_new.append(polycoeff[i] - val)
+        else:
+            equation_new.append(polycoeff[i])
+            
+    guess = 0
+    guess_function = np.polyval(equation_new, guess)
+    last_sign = np.sign(guess_function)
+    current_sign = np.sign(guess_function)
+    while abs(guess_function) >= EPSILON and current_sign == last_sign and guess <= max_x:        
+        guess += 1
+        last_sign = current_sign
+        guess_function = np.polyval(equation_new, guess)
+        current_sign = np.sign(guess_function)
+        
+    if guess > max_x:
+        return None
+    else:
+        return guess
+   
+
+
+def flip_vertical(image: Image) -> Image: 
+    """ 
+    T037 
+    Contributer: Lauren Ogilvie 101179971
+    
+    Returns a copy of the original image that is flipped along the horizontal line.
+    
+    >>> image = load_image(choose_file())
+    >>> image_flipped = flip_vertical(image)
+    >>> show(image_flipped)
+    
+    >>> image = "image"
+    >>> image_flipped = flip_vertical(image)
+    builtins.AttributeError: 'str' object has no attribute 'copy'
+    
+    """
+    modified_image = copy(image)
+    y2 = get_height(image) - 1
+    for x,y, (r,g,b) in image:
+        
+        color = create_color(r,g,b)
+        set_color(modified_image, x,(y2-y), color)
+   
+    return modified_image
+   
+
+
+def flip_horizontal(image:Image) -> Image:
+    """ 
+    T037
+    Contributor: Patrick Ferenc 101192901
+    
+    This function is designed to flip an image horizonatally 
+          by flipping the width pixel coordinate. 
+    """
+      
+    flippedimg = copy(image)
+    x2 = get_width(image) - 1
+    for x, y, (r,g,b) in image :
+  
+        copycolor = create_color(r,g,b)
+        set_color(flippedimg, (x2-x), y, copycolor)    
+          
+    return flippedimg
+
+
 
