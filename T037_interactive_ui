@@ -93,7 +93,8 @@ def interface_menu() -> str:  #not sure if this needs a specifc name
             show(newimage)
         elif user_input == "H" : 
             newimage = flip_horizontal(image)
-            show(newimage)            
+            show(newimage) 
+        
     return print("Quiting software")
     
 COMMANDS = ['L','S','G','R','B','C','3','X','T','P','E','D','V','H','Q'] 
