@@ -4,8 +4,8 @@
 
 import numpy as np
 from Cimpl import load_image, save_as, show, copy, choose_file
-#from point_manipulation import _take_first
-#from T037_image_filters import sepia, three_tone, extreme_contrast, posterize, "edge detection", draw_curve, _image_border_finding, _interpolate, _exhaustive_search, flip_vertical, flip_horizontal #just a start probally needs more imports
+from point_manipulation import _take_first
+from T037_image_filters import sepia, three_tone, extreme_contrast, _adjust_component, posterize, detect_edges, draw_curve, _image_border_finding, _interpolate, _exhaustive_search, flip_vertical, flip_horizontal 
 
  
 
@@ -50,8 +50,9 @@ def interface_menu() -> str:  #not sure if this needs a specifc name
         if user_input == "L" :
             image = load_image(choose_file())
             show(image)
-        elif user_input == "S" : # i honestly done know how this one works
-            
+        elif user_input == "S" :
+            save_as(image)
+            print("Image Saved Successfully")
         elif user_input == "G" : 
             newimage = green_channel(image)
             show(newimage)
