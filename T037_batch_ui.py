@@ -26,7 +26,8 @@ string3 = "lemon"
 
 def apply_filters(image: Image,filter_list: list):
     """
-    If the character in the if statement is present in the file, the relevant filter is applied 
+    Applies the requisite filters, gotten from the test_file. Simply type in the name of the file upon the prompt (ensuring its in the same place as the program), and two files 
+    will be created (for 2 lines). To test the UI, open the files.
     """
     #Changes the filters to lowercase, so that the file does not have to be case sensitive
     lowerFilters = []
