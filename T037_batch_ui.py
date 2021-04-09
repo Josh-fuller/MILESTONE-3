@@ -3,6 +3,8 @@ from Cimpl import *
 from T037_image_filters *
 #Contributors: JOSH FULLER 101201594
 #              JACK OOMEN 101187427
+#Submitted April 9th 2021
+
 
 #Color dictionary
 colordict = {
