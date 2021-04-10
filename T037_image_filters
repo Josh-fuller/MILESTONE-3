@@ -3,13 +3,12 @@
 # Patrick Ferenc 101192901
 # Jack Oomen 101187427
 # Lauren Ogilvie 101179971
-#Submitted April 9th 2021
 
 import numpy as np
 from Cimpl import *
-from point_manipulation import *
+import point_manipulation as pm
+from PIL import Image, ImageDraw
 from simple_Cimpl_filters import grayscale
-
 
 def blue_channel(image: Image) -> Image: 
     """
@@ -29,7 +28,7 @@ def blue_channel(image: Image) -> Image:
         blue_image = create_color(0, 0, b)
         set_color(image_new, x, y, blue_image)
         
-      
+        
 def green_channel(image: Image) -> Image:
     """ 
     T037
@@ -74,7 +73,7 @@ def red_channel(image: Image) -> Image:
 def combine(redimage: Image, greenimage: Image, blueimage: Image) -> Image:
     """
     T037
-    Contributor: Josh Fuller 101201594
+    Contributor: Josh Fuller
     Returns a combined image using the RBG colour channel from the three input filter channels.
     """
     
@@ -92,7 +91,7 @@ def combine(redimage: Image, greenimage: Image, blueimage: Image) -> Image:
         set_color(combined_image, x, y, combination_filter)
     return combined_image #Returns the final image
     
-  
+#Three-tone filter    
 def three_tone(image: Image,string1: str, string2: str,string3: str) -> Image:
     """
     T037
@@ -129,7 +128,7 @@ def three_tone(image: Image,string1: str, string2: str,string3: str) -> Image:
     return toneimage 
  
  
-
+#Extreme Contrast Filter 
 def extreme_contrast(image: Image) -> Image:
     
     """
@@ -162,7 +161,7 @@ def extreme_contrast(image: Image) -> Image:
         set_color(filter_image, x, y, contrast)
     return filter_image
 
-
+#Sepia Filter
 def sepia(image: Image) -> Image: 
     """
     T037
@@ -253,6 +252,7 @@ def posterize(image: Image) -> Image:
     return posterimage
 
 
+
 def detect_edges(image: Image, threshold: int) -> Image:
     """
     #T037 
@@ -284,10 +284,11 @@ def detect_edges(image: Image, threshold: int) -> Image:
     return edge_image
 
 #Curve Draw filter
+#T037
 #Author: Jack Oomen 101187427, assisted by all group members
-#_image_border_finding Contributer: Josh Fuller 101201594
-#_exhaustive_search Contributer: Lauren Ogilvie 101179971
-#interpolation Contributer: Patrick Ferenc 101192901
+#_image_border_finding author: Josh Fuller 101201594
+#_exhaustive_search author: Lauren Ogilvie 101179971
+#interpolation author: Patrick Ferenc 101192901
 
 def draw_curve(image: Image, colour: str, point_list: list) -> tuple:
     """    
@@ -434,6 +435,8 @@ def _exhaustive_search(max_x: int, polycoeff: list, val: int) -> int:
     else:
         return guess
    
+
+
 def flip_vertical(image: Image) -> Image: 
     """ 
     T037 
@@ -459,6 +462,8 @@ def flip_vertical(image: Image) -> Image:
    
     return modified_image
    
+
+
 def flip_horizontal(image:Image) -> Image:
     """ 
     T037
