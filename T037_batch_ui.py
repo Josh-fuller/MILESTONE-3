@@ -1,9 +1,12 @@
-from Cimpl import *
-
-from T037_image_filters *
+# Milestone 3 - Batch UI
+# T037
 #Contributors: JOSH FULLER 101201594
 #              JACK OOMEN 101187427
 #Submitted April 9th 2021
+
+from Cimpl import *
+
+from T037_image_filters *
 
 
 #Color dictionary
