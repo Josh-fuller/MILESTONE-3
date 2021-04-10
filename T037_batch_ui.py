@@ -41,7 +41,7 @@ def apply_filters(image: Image,filter_list: list):
         
     #lowerFilters = [ x.lower() for x in filter_list ]
     
-    #Relevant filter characters
+    #If relevant filter is present based on characters, said filter is applied to the image.
     if '3' in lowerFilters:  
         image = three_tone(image,string1,string2,string3)
     if 'x' in lowerFilters:  
