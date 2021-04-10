@@ -1,4 +1,3 @@
-# ECOR 1042 Milestone 3 - Interactive UI
 # T037 
 # Contributer: LAUREN OGILVIE 101179971
 # Contribiter: PATRICK FERENC, 101192901
@@ -53,10 +52,7 @@ def interface_menu() -> str:  #not sure if this needs a specifc name
             image = load_image(choose_file())
             show(image)
         elif user_input == "S" : # i honestly done know how this one works
-            if 'newimage' in locals():
-                save_as(newimage)
-            else:
-                print( 'Error: no filter applied yet!' )                
+            save_as(newimage)
         elif user_input == "G" : 
             newimage = green_channel(image)
             show(newimage)
@@ -85,8 +81,8 @@ def interface_menu() -> str:  #not sure if this needs a specifc name
             newimage = posterize(image)
             show(newimage)
         elif user_input == "E" : 
-            thickness = input("Threshold thickness : ")
-            newimage = detect_edges(image,int(thickness))
+            thickness = int(input("Threshold thickness : "))
+            newimage = detect_edges(image,thickness)
             show(newimage)  
         elif user_input == "D" :
             colour = input("Enter desired colour of line:")
