@@ -1,4 +1,4 @@
-# Milestone 3 - Batch UI
+# ECOR 1042 Milestone 3 - Batch UI
 # T037
 #Contributors: JOSH FULLER 101201594
 #              JACK OOMEN 101187427
