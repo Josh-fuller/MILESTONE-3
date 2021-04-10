@@ -1,10 +1,10 @@
 # T037 
 # Contributer: LAUREN OGILVIE 101179971
 # Contribiter: PATRICK FERENC, 101192901
-# Submitted April 9th 2021
 
 import numpy as np
 from Cimpl import load_image, save_as, show, copy, choose_file
+import Cimpl as cimp
 from point_manipulation import _take_first
 from T037_image_filters import *
 
@@ -52,7 +52,10 @@ def interface_menu() -> str:  #not sure if this needs a specifc name
             image = load_image(choose_file())
             show(image)
         elif user_input == "S" : # i honestly done know how this one works
-            save_as(newimage)
+            if 'newimage' in locals():
+                save_as(newimage)
+            else:
+                print( 'Error: no filter applied yet!' )                
         elif user_input == "G" : 
             newimage = green_channel(image)
             show(newimage)
@@ -82,13 +85,15 @@ def interface_menu() -> str:  #not sure if this needs a specifc name
             show(newimage)
         elif user_input == "E" : 
             thickness = input("Threshold thickness : ")
-            newimage = detect_edges(image,thickness)
+            newimage = detect_edges(image,int(thickness))
             show(newimage)  
         elif user_input == "D" :
             colour = input("Enter desired colour of line:")
             pointlist = []
-            newimage = draw_curve(image, colour, pointlist)
-            show(newimage)            
+            newimage, bound = draw_curve(image.pil_image, colour, pointlist)            
+            cimage = cimp.Image(image=image)
+            cimage.pil_image = newimage
+            show(cimage)
         elif user_input == "V" : 
             newimage = flip_vertical(image)
             show(newimage)
@@ -101,3 +106,5 @@ def interface_menu() -> str:  #not sure if this needs a specifc name
 COMMANDS = ['L','S','G','R','B','C','3','X','T','P','E','D','V','H','Q'] 
 FILTERS = ["3","X","T","P","V","H"]
 image = 0
+
+interface_menu()
