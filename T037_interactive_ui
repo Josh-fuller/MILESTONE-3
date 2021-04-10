@@ -9,6 +9,8 @@ from point_manipulation import _take_first
 from T037_image_filters import *
 
  
+# the following code is designed to be a user interface that interacts with the user.
+# after each command the image will show so the user can see what is happening, in order to continuie the user will have to close the openned image. 
 
 def interface_menu() -> str:  #not sure if this needs a specifc name 
     """
@@ -35,66 +37,65 @@ def interface_menu() -> str:  #not sure if this needs a specifc name
     X
     """
     usercommand = 0
-    
+    # the following code will loop the interface until the user wishs to exit the program. 
+    # the menu of commands will appear everytime a command is used to remind the user of the list
     while usercommand != "Q" :
         print(" L)oad image  S)ave-as ")
         print(" G)reen image  R)ed image  B)lue image  C)ombine ")
         print(" 3)-tone  X)treme contrast  T)int sepia  P)osterize ")
         print(" E)dge detect  D)raw curve  V)ertical flip  H)orizontal Flip ")
         print(" Q)uit \n ")
-        user_input = input(": ")
-        user_input = user_input.upper()
+        user_input = input(": ")  # asks the user for a command
+        user_input = user_input.upper() # converts to uppercase
         print(user_input)
         usercommand = user_input
-        #for i in COMMANDS :
-            #if i == user_input :
-        if user_input == "L" :
+        if user_input == "L" :  # Loads the image
             image = load_image(choose_file())
             show(image)
-        elif user_input == "S" : # i honestly done know how this one works
+        elif user_input == "S" : # Saves the image after is is used in filter
             save_as(newimage)
-        elif user_input == "G" : 
+        elif user_input == "G" : # this will change the image all green
             newimage = green_channel(image)
             show(newimage)
-        elif user_input == "R" : 
+        elif user_input == "R" : # this will change the image all red
             newimage = red_channel(image)
             show(newimage)
-        elif user_input == "B" : 
+        elif user_input == "B" : # this will change the image all blue
             newimage = blue_channel(image)
             show(newimage)
-        elif user_input == "C" : 
+        elif user_input == "C" : # this will combine the image r,g,b images. 
             newimage = combine(image)
             show(newimage)
-        elif user_input == "3" : 
+        elif user_input == "3" : # this is used for the three tone, it will ask for 3 tones of colours
             tone1 = input("Tone1 : ")
             tone2 = input("Tone2 : ")
             tone3 = input("Tone3 : ")
             newimage = three_tone(image, tone1, tone2, tone3)
             show(newimage)
-        elif user_input == "X" : 
+        elif user_input == "X" : # this is used for the extreme contrast
             newimage = extreme_contrast(image)
             show(newimage)            
-        elif user_input == "T" : 
+        elif user_input == "T" : # this code is for the sepia filter. 
             newimage = sepia(image)
             show(newimage)
-        elif user_input == "P" : 
+        elif user_input == "P" : # this part of the if statement is used to change the image onto a posterized image
             newimage = posterize(image)
             show(newimage)
-        elif user_input == "E" : 
+        elif user_input == "E" : # this filter is used for the detect_edges, it will ask for the thickeness of the line. 
             thickness = int(input("Threshold thickness : "))
             newimage = detect_edges(image,thickness)
             show(newimage)  
-        elif user_input == "D" :
-            colour = input("Enter desired colour of line:")
+        elif user_input == "D" : # This code is used for the draw curve filter. It will ask for the amount of points and there (x,y) cordinates
+            colour = input("Enter desired colour of line:") # asks for the colour of the line.
             pointlist = []
             newimage, bound = draw_curve(image.pil_image, colour, pointlist)            
             cimage = cimp.Image(image=image)
             cimage.pil_image = newimage
             show(cimage)
-        elif user_input == "V" : 
+        elif user_input == "V" : # this command will flip the image vertically
             newimage = flip_vertical(image)
             show(newimage)
-        elif user_input == "H" : 
+        elif user_input == "H" : # this part will change the image horizontally
             newimage = flip_horizontal(image)
             show(newimage) 
         
