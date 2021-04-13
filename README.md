@@ -9,7 +9,8 @@ Date: 16 April 2021
 -------------
 Python 3.7.9 or newer version must be installed. 
 Wing 101 7.2 or later version intalled. 
-Extrenal modules that are used: Cimpl, point_manipulation, simple_Cimpl_filters, T037_image_filters, 
+Extrenal modules that are used: Cimpl, point_manipulation, simple_Cimpl_filters, T037_image_filters, numpy and PIL.
+Built in Python modules are used, they should be already imported in some of the extrenal modules. 
 
 
 #Usage
