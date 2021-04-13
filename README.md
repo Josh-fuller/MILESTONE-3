@@ -6,6 +6,11 @@ Date: 16 April 2021
 #Description
 
 #Installation
+-------------
+Python 3.7.9 or newer version must be installed. 
+Wing 101 7.2 or later version intalled. 
+Extrenal modules that are used: Cimpl, point_manipulation, simple_Cimpl_filters, T037_image_filters, 
+
 
 #Usage
 In order to use the batch user interface a .txt file is needed which is correctly formatted for the code to interpret.
