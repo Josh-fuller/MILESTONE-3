@@ -1,9 +1,16 @@
 #Team Leader Contact
-Date: 16 April 2021
+Date: 14 April 2021
 
 #PROJECT NAME/VERSION
 
 #Description
+A photo editing program that gives the user ability to apply a variety of unique images filters to a selected image of the user choosing. Two interfaces are provided. The text-based interactive UI and a batch UI. Through the interactive UI, the user is able to load an imagr and then perform a sequence of filters and draw curve functions on the imagr. The batch UI uses a .txt file that can load a list of images, apply a continuation filters and save the image.
+
+- This project is made up using the following files:
+    T037_image_filters.py
+    T037_interactive_ui.py
+    T037_user_interface.py
+    T037_batch_ui.py
 
 #Installation
 -------------
