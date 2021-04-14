@@ -35,3 +35,40 @@ Example of T037_batch_ui
 >>> file = input("File path:") #prompts the user to input the name of the desired .txt file for the program to take as input
 >>> batch_input = batch_ui(file) #sends the selected file to 'batch_ui' function as a str variable
 >>> #Program ends with a saved a copy of the orginal image with filters applied (via the 'apply_filters' function) which was named according the second part of the orginal .txt     file
+>>> 
+
+
+
+
+
+
+
+Credits: 
+
+Blue channel filter - Lauren Ogilvie 
+Red channel filter - Jack Oomen
+Green channel filter - Patrick Ferenc
+Combine filter - Josh Fuller 
+Three-tone filter - Josh Fuller
+Extreme contrast filter -Jack Oomen
+Sepia filter - Lauren Ogilvie
+Posterize image filter - Patrick Ferenc
+_adjust_component function - 
+Edge Detection - Josh Fuller
+Draw curve - Jack Oomen
+Flip vertical filter - Lauren Ogilvie
+Flip horizontal filter - Patrick Ferenc 
+_image_border_finding function - Josh Fuller
+_exhaustive_search function - Lauren Ogilvie
+_interpolation function - Patrick Ferenc
+Interactive UI - Patrick Ferenc and Lauren Ogilvie 
+Batch UI - Josh Fuller and Jack Oomen
+
+License: 
+________
+
+Copyright (c) 2021 "Name of thingy". All rights reserved. 
+
+
+THIS SOFTWARE IS PROVIDED "AS IS", WITH NO WARRENTY OF ANY KIND EXPRESSED OR IMPLIED.
+IN NO EVENT SHALL THE COPYRIGHTERS BE HELD FOR LIABILITY OR CLAIM. ALL USE IS AT OWN RISK.
