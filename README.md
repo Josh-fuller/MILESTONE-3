@@ -1,8 +1,10 @@
-#Team Leader Contact
-****Contact INFO*****
-Date: 14 April 2021
+Milestone 3 Version 1.0
 
-*****PROJECT NAME/VERSION*****
+****Contact INFO*****
+VOICE: 613-619-0942
+EMAIL: joshfuller@cmail.carleton.ca
+
+Date: 14 April 2021
 
 Description
 ------------
@@ -87,7 +89,7 @@ Batch UI - Josh Fuller and Jack Oomen
 License: 
 ________
 
-Copyright (c) 2021 ******"Name of thingy"*********. Josh Fuller, Patrick Ferenc, Jack Oomen, and Lauren Ogilvie. 
+Copyright (c) 2021 MILESTONE 3. Josh Fuller, Patrick Ferenc, Jack Oomen, and Lauren Ogilvie. 
 All rights reserved. 
 
 
